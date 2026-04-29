@@ -1,7 +1,7 @@
 {
-	"admin/netwiz": {
+	"admin/status/netwiz": {
 		"title": "Network Wizard",
-		"order": 99,
+		"order": 199,
 		"action": {
 			"type": "view",
 			"path": "netwiz"
