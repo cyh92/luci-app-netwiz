@@ -1,81 +1,135 @@
 # NetWiz (luci-app-netwiz) 🚀
 
-**NetWiz**网络设置向导-极简，开箱即用，是一款逻辑严谨缜密，搭载企业级Lan口防失联机制，WAN口上网方式智能切换（间隔10秒接入WAN口启动），智能防错校验，智能WiFi满血释放（无硬件时自动隐藏）、一键开启IPV6、智能IP、网关、WAN口、Lan口冲突排雷，全方位的守护，极致的无感体验，大屏小屏体验行云流水、观感丝滑。
-
-**NetWiz(NetWiz Network Wizard)** — minimalist and ready out of the box. Built with rigorous, well-structured logic, it features an enterprise-grade LAN fail-safe mechanism, intelligent WAN mode switching (Auto-detect will be triggered only when the WAN cable is reinserted after a 10-second disconnection), smart validation and error prevention, and full-performance WiFi with automatic hiding when hardware is unavailable. It also enables one-click IPv6 activation, proactively resolves IP, gateway, WAN, and LAN conflicts, and delivers comprehensive protection with a seamless, intuitive experience across both large and small screens.
-
-![OpenWrt](https://img.shields.io/badge/OpenWrt-23.05_|_25.x+-blue.svg) ![ImmortalWrt](https://img.shields.io/badge/ImmortalWrt-Supported-orange.svg) ![License](https://img.shields.io/badge/License-GPL--3.0-green.svg) ![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg)
-
 [English](#english) | [简体中文](#简体中文)
+
+**NetWiz** —— 您的专属 OpenWrt 极简网络设置向导。开箱即用，化繁为简。
+
+凭借严谨缜密的底层逻辑，NetWiz 不仅为您提供直观的交互与大小屏极致丝滑的 UI 体验，更带来全方位的企业级网络守护：
+
+🛡️ 智能配置与防呆守护：搭载企业级 LAN 口防失联机制与全网段冲突排雷（智能解决 IP、网关、WAN/LAN 冲突）。支持 WAN 口上网方式盲插智能切换（断开 10 秒后重新接入自动侦测）、智能防错校验、一键开启 IPv6，以及智能 Wi-Fi 满血释放（无物理硬件时自动隐藏）。
+
+📊 企业级网络管控：深入系统内核，提供灾备级全自动配置管理。涵盖终端流量透视、IP 智能分组、一键批量绑定静态 IP 策略组以及一键防火墙控制，让复杂网络管理得心应手。
+
+📦 首创 SmartGhost 智能恢复：NetWiz 不仅仅是设置向导，更打造了独家首创智能备份与恢复的完美闭环。搭载「SmartGhost 全量离线系统恢复」技术，无需全程联网，无惧跨版本刷机！能在彻底断网的新固件上，一键完美恢复您的插件与复杂网络配置，并提供商用级的防内存溢出（OOM）保护与跨网段无缝跃迁的丝滑恢复体验。
+
+**NetWiz (Network Wizard)** — Your exclusive, minimalist OpenWrt network setup wizard. Ready out of the box, turning complexity into simplicity.
+
+Built upon rigorous and well-structured underlying logic, NetWiz delivers not only a seamlessly smooth and responsive UI across all screen sizes but also comprehensive, enterprise-grade network protection:
+
+🛡️ Intelligent Setup & Failsafe Protection: Features an enterprise-grade LAN fail-safe mechanism and proactive conflict resolution across IP, Gateway, WAN, and LAN subnets. It supports smart WAN mode blind-switching (auto-detects when the cable is reinserted after a 10-second disconnection), smart error-prevention validation, one-click IPv6 activation, and full-performance Wi-Fi configuration (automatically hides when no physical hardware is detected).
+
+📊 Enterprise-Grade Network Management: Diving deep into the system kernel, NetWiz empowers you with disaster-recovery-level automated management. It offers terminal traffic visibility, smart IP grouping, one-click batch binding for static IP policy groups, and one-click firewall control.
+
+📦 SmartGhost Offline Full Recovery: Much more than just a setup wizard, NetWiz pioneers a perfect closed-loop backup and restore ecosystem. Powered by the original "SmartGhost Full Offline System Recovery" technology, it requires no continuous internet connection and eliminates the fear of cross-version firmware flashing. It can perfectly clone and restore all your third-party plugins and complex network configs onto newly flashed, completely offline firmware—all while delivering commercial-grade Out-of-Memory (OOM) protection and a seamless cross-subnet recovery experience.
+
+![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg) ![OpenWrt](https://img.shields.io/badge/OpenWrt-23.05_|_25.x+-blue.svg) ![ImmortalWrt](https://img.shields.io/badge/ImmortalWrt-Supported-orange.svg) ![Downloads](https://img.shields.io/github/downloads/huchd0/luci-app-netwiz/total.svg?logo=github) ![Views](https://komarev.com/ghpvc/?username=huchd0-luci-app-netwiz&label=Views&color=blue&style=flat) ![License](https://img.shields.io/badge/License-GPL--3.0-green.svg)
 
 ---
 
 ## English
 
+### Description
+
+**NetWiz (Network Setup Wizard)** is a minimalist, secure, and "zero-destructive" network configuration interface exclusively designed for OpenWrt and ImmortalWrt.
+
+Tailored perfectly for novice users, it enables secure, one-click configuration of secondary routers (Dynamic/Static IP) and Bypass/AP (Wired Repeater) environments. For users who have just flashed a new system, setting up the network is essential for internet access, yet native settings are often deeply hidden and error-prone. Blindly and forcefully resetting network configuration files can **wipe out your configured device lists**, causing carefully crafted network bridges, VLANs, and physical NIC bindings to **crash instantly or trigger inexplicable issues**. **NetWiz is born to solve this exact pain point.**
+
+### Installation Methods
+
+[Use the one-click command for quick installation.](#install)
+
 ```bash
-wget -qO- https://raw.githubusercontent.com/huchd0/luci-app-netwiz/master/install.sh | sh
+if wget -qO /tmp/nw_inst.sh https://raw.githubusercontent.com/huchd0/luci-app-netwiz/master/install.sh; then sh /tmp/nw_inst.sh; else sh /etc/netwiz/custom_pkgs/install.sh; fi
 ```
 
-### Description
-**Netwiz(luci-app-netwiz)** is a minimalist, safe, and non-destructive network configuration interface for OpenWrt/ImmortalWrt. 
+## 🤝 Compatibility Guide
 
-It is designed to be highly user-friendly for novices setting up secondary routers (DHCP/Static IP) or bypass routers.
+* **Firmware Support:** OpenWrt 23.05+ and ImmortalWrt 23.05+ are recommended (Flawlessly supports the new 25.x+ branches and is fully compatible with the `nftables` environment).
+* **Architecture Support:** Universal compatibility across all architectures (x86_64, aarch64, ramips/mt7621, etc.).
 
-### 🌟 Key Features
+**💡 Ultimate System Compatibility:**
+NetWiz achieves true "zero external dependencies," utilizing no C/C++/Go compiled binaries or third-party modules. Backed by a highly rigorous underlying safeguard and fallback architecture, NetWiz delivers outstanding compatibility across various branches and heavily modified (custom-built) firmwares. Whether on legacy systems or the new generation `fw4`/DSA architecture post-23.05, it adapts perfectly and runs with rock-solid stability.
 
-**🛡️ Enterprise-Grade Fail-Safes**
-* **Persistent Power-Loss Recovery:** Backups are written to non-volatile flash (`/etc/config`). An early-boot `init.d` script guarantees an automatic network restoration even if the router loses power mid-test.
-* **Smart Concurrency Radar (LAN Auto-Defuse):** The 120-second rollback bomb uses `netstat` to count concurrent connections, accurately distinguishing true browser access from background IoT probes to prevent false-positive defusals.
-* **Smart WAN Auto-Detect (Anti-Jitter):** Features a time-based debounce algorithm that requires 3 continuous down-cycles to confirm a physical cable unplug, safely ignoring temporary software interface bounces.
-* **Flash-Friendly Safe Logging:** Includes a persistent, auto-trimming logging system (`/etc/netwiz.log`) that survives reboots but strictly caps file size to protect the router's flash memory lifespan.
+## ✨ Core Features & Advantages
 
-**⚙️ Core Architecture & Security**
-* **Zero-Zombie `procd` Daemon:** Replaces unreliable `hotplug` tricks with a single, ultra-lightweight native OpenWrt daemon (`netwiz-monitor`) that reads `ubus` states with near 0% CPU footprint.
-* **Strict ACL:** The frontend has zero direct write access to UCI. All modifications are safely encapsulated and validated within the backend `rpcd` script.
-* **Safe Configuration:** Strictly prevents routing loops and network conflicts (e.g., actively stops users from putting WAN and LAN in the same subnet).
+### 💻 Modern Architecture
+* **Lightning-Fast & Stutter-Free:** Built on a modern responsive and elastic architecture, saying goodbye to clunky and laggy interfaces. It perfectly adapts to both desktop and mobile screens for a silky-smooth experience.
+* **Strict Privilege Isolation:** Complete separation of UI operations and underlying system privileges. The frontend has no direct permission to modify core configs; all changes are safely executed by a trusted sandbox proxy.
+* **Native Multi-Language Support:** Automatically switches between Simplified Chinese, Traditional Chinese, and English based on your system environment.
+* **Extensive Hardware Compatibility:** Intelligently adapts to multi-chip and multi-band hardware, maximizing hardware potential and unleashing full Wi-Fi signal strength.
 
-**🚀 Smooth UX & Frontend**
-* **Pure CSR Architecture:** Built with modern Client-Side Rendering for a blazing-fast, app-like experience.
-* **Asynchronous UI & Hot-Reload:** Eliminates traditional blind wait times. The UI asynchronously "knocks" on the new IP with a real-time stopwatch. The backend applies changes via `reload` instead of a full `restart` to prevent Wi-Fi dropouts.
-* **Bypass Router Mode:** One-click deployment that auto-configures complex DHCP, DNS, and gateway settings flawlessly.
-* **Multi-language:** Native built-in i18n support, automatically adapting to English, zh-Hans, and zh-Hant.
+### 🛡️ Comprehensive Safeguards
+* **Failsafe Rollback Mechanism:** Afraid that a configuration error will lock you out of the backend? Don't worry! Applying new configurations triggers a 120-second safety countdown. If no real new IP connections access the LAN port after the change, the system automatically reverts to the previous configuration **(gracefully recovers even upon unexpected power loss or reboot)**.
+* **Smart Error Prevention:** Strictly and accurately intercepts high-risk operations such as "IP conflicts or incorrectly filled information," preventing router endless loops right from the source.
+* **Bypass/AP Mode Auto-Safeguard:** Switch to Bypass or AP (Wired Repeater) mode safely with one click. The system automatically disables conflicting services, provides smart setup guidance, and helps you fill in the correct information without disrupting your existing home network topology. Beginner-friendly.
+* **Comprehensive Device Dashboard:** Master the real-time dynamics of all online, offline, and static devices.
+* **Traffic Analysis Probe:** Hover to view the P2P and Web connection distribution for any specific device.
+* **Full-Link Disaster Recovery:** Roll back or import external configuration files at any time.
 
-### 📶 Powerful Smart Wi-Fi Engine（Auto-hide when Wi-Fi is unavailable）
-* **Infinite Chip Array Detection:** Breaks the rigid limits of traditional single/dual-chip plugins. Automatically scans and takes over all physical wireless adapters in the system. Perfectly adapts to single-band, dual-band, tri-band, or even multi-band routers, ensuring no hardware is left idle.
-* **Ultimate Low-Level Override:** Designed for incomplete, conflicting, or misconfigured underlying settings (e.g., a single chip stuck in 5G mode). Features an exclusive "Will Override Rule" that ignores residual hardware history, forcibly cleansing and rewriting the correct physical protocols and channels to guarantee a 100% successful application.
-* **Smart Bandwidth Unleashed:** Say goodbye to crippled networks! When applying configurations, it intelligently identifies hardware limits and silently maximizes channel width (e.g., boosting 2.4G to HT40 and 5G to VHT80). It safely preserves existing Wi-Fi 6 (HE) configurations, ensuring effortless gigabit speeds.
-* **Seamless Two-Way Data Sync:** When switching between "Smart Connect" and "Separate Bands", Wi-Fi passwords and SSIDs are intelligently synced back and forth, eliminating repetitive typing. Features historical config memory—retrieve your old password instantly even after disabling and re-enabling Wi-Fi.
+### ⚡ Ultimate Seamless Experience
+* **Smart WAN Mode Switching:** Detects the physical plug/unplug status of the WAN cable and intelligently adapts the network mode. It perfectly filters out "pseudo-disconnections" caused by dial-up failures or software reboots **(unplugging the network cable and reconnecting after 10 seconds triggers the smart mode-switching mechanism)**.
+* **Auto-Detection & Instant Redirection:** After modifying the IP, the frontend silently probes the new address. Once the network connects, it instantly redirects, ensuring a buttery-smooth experience.
+* **Non-Disruptive Network Settings:** Applying partial network settings keeps Wi-Fi stable and connected without interfering with other devices' internet access.
+* **Seamless Bi-Directional Sync:** When switching between "Band Steering (Merged)" and "Split Band" modes, Wi-Fi passwords and SSIDs are intelligently synchronized, eliminating the hassle of repetitive typing. Built-in historical config memory.
+* **One-Click IPv6:** Intelligently issues IPv6 addresses with one click, saying goodbye to obscure DHCPv6, SLAAC, and relay settings. With a simple tap, the system automatically assigns IPv6 addresses to your devices.
+* **One-Click Seamless Wi-Fi Roaming:** Enable seamless roaming without requiring professional technical skills. Just meet two conditions for automatic, silky-smooth Wi-Fi transitions between multiple routers: identical Wi-Fi names/passwords and devices on the same LAN. *(Note: Ensure no multiple DHCP servers exist in the environment; if routers are close to each other, stagger channels to avoid co-channel signal interference.)*
+* **Quick Wireless Repeater (WISP):** Enter the upstream Wi-Fi credentials to receive the signal and broadcast your own exclusive Wi-Fi network.
 
-### Installation
-* You can compile it directly via the OpenWrt SDK or download the pre-compiled `.apk` / `.ipk` from the [Releases](../../releases) page.
-Core Supported Modules
+### 📶 Powerful Smart Wi-Fi Control
+* **Universal Hardware Adaptation:** Automatically takes over all physical wireless NICs in the system, seamlessly adapting whether it's a single-band, dual-band, tri-band, or even multi-band router.
+* **Hidden Fault Repair:** Targets incomplete, conflicting, or corrupted underlying configurations. Automatically cleans up legacy error Wi-Fi configs in the system and corrects stuck network states, ensuring highly stable wireless performance.
+* **Full Bandwidth Unleashed:** Say goodbye to crippled network speeds! When saving configurations, it intelligently identifies hardware limits and silently optimizes Wi-Fi bandwidth for maximum throughput.
 
-### Breadcrumb Trail
-* 👉 **A primary menu entry appearing right before “Logout -> Network Wizard**。
-  
-   (Placing the Network Setup Wizard immediately before “Logout” is a deliberate UI decision that benefits both beginners and users seeking quick configuration. It offers a highly visible, easily accessible entry point, eliminating the need to navigate complex OpenWrt menus. Moreover, this layout aligns with the polished, user-centric design conventions adopted by established router brands such as ASUS, TP-Link, and Xiaomi.)
-  
-🌐 **Secondary Router Mode (DHCP / Static IP)**
-   * Use Case: When the upstream modem (ONT) already handles PPPoE dialing, or an existing primary router is present. This device operates as a secondary router or segmented subnet router.
-   * Behavior: Supports both dynamic IP assignment (DHCP) and static IP configuration. Automatically provisions WAN interface settings and performs intelligent subnet validation to prevent routing loops or address conflicts.
+### 🧭 Quick Navigation
+👉 **Find the 👉 Network Wizard directly at the end of the LuCI primary menu (right before the "Logout" button).**
 
-🔌 **Broadband Dial-Up (PPPoE)**
-   * Use Case: When the modem is configured in full bridge mode and this router is responsible for establishing the PPPoE connection, acting as the primary network gateway.
-   * Behavior: Accurately applies PPPoE credentials (username and password), removes residual gateway configurations, and safely restarts the underlying dialer process to ensure a clean connection.
+---
 
-🏠 **LAN Configuration (Primary / Bypass Router Switching)**
-   * Use Case: For modifying the device’s LAN management IP, or when a primary router already exists and this device functions as an auxiliary gateway (bypass router).
-   * Behavior: One-click activation of “Bypass Router Mode” automatically disables the local DHCP service and enforces manual configuration of the upstream gateway. In primary router mode, safeguards ensure the gateway field remains empty, preventing disruption to the existing LAN topology.
+### 🚀 Four Core Supported Modules:
 
-   A bypass router lets you add advanced features without touching the main network. The primary router keeps handling DHCP and NAT, while the bypass router processes selected traffic for tasks like policy routing or proxies. This keeps the network stable while giving you more control.
+1. 🔌 **Broadband Dial-up (PPPoE)**
+   * **Scenario:** The optical modem is in pure bridge mode; this router handles the dial-up directly, acting as the whole-house network hub.
+   * **Behavior:** Accurately writes broadband accounts and passwords, strips residual legacy gateway settings, and safely restarts underlying dial-up processes.
 
-**A simple, common example:**
-   
-   * You have a main router providing Wi-Fi and DHCP for your home. You add a bypass router and set only your laptop’s gateway to it. Now, your laptop’s traffic goes through the bypass router (e.g., for proxy or special routing), while all other devices continue using the main router normally. This way, you get advanced control on one device without affecting the rest of the network.
+2. 📶 **Wi-Fi Settings (Auto-hides if no hardware is detected)**
+   * **Scenario:** Initializing the wireless network for the first time, or modifying the whole-house Wi-Fi name, password, and security encryption protocol.
+   * **Behavior:** Intelligently detects the number of underlying physical chips and dynamically renders the UI. Supports one-click "Band Steering (Merged)" for a whole-house smart roaming network, or splitting into independent 2.4G/5G/5G_Game networks. Perfectly compatible with legacy 802.11b IoT devices.
 
-📶 **Wi-Fi Settings（Auto-hide when Wi-Fi is unavailable）**
-* **Use Case**: Initial wireless network setup, or modifying the SSID, password, and encryption protocols for your whole-home network.
-* **Behavior**: Intelligently detects the number of underlying physical chips to dynamically render the UI. Supports one-click "Smart Connect (All Bands)" to build a seamless roaming network, or splits into independent 2.4G/5G networks. Perfectly backwards compatible with legacy 802.11b IoT devices.
+3. 🌐 **Secondary Router Mode (DHCP / Static IP)**
+   * **Scenario:** The modem handles dial-up, or there is an existing main router upstream. This device acts as a secondary router or subnet router.
+   * **Behavior:** Freely choose "Dynamic IP (DHCP)" or "Static IP". Automatically takes over WAN port configurations and intelligently validates subnets to prevent routing loops.
+
+4. 🏠 **LAN Settings (Main Router / Bypass/AP Mode Toggle)**
+   * **Scenario:** Only modifying the device's internal management IP; or a main router already exists, and this device serves purely as an auxiliary gateway / Bypass router (AP Wired Repeater).
+   * **Behavior:** One-click toggle for "Bypass/AP Mode". The system automatically disables the local DHCP service and enforces main router gateway input. If acting as the main router, it smartly prompts to leave the gateway blank, guaranteeing zero destruction to the existing LAN topology.
+
+---
+
+## ✨ Device Management Expert: Core Features
+
+### ⚡ Connection Radar & Kernel-Level Traffic Insight
+* **Real-Time Connection Tracking:** Deeply parses the core modules of network connection states, capturing the underlying network connections of terminal devices in real-time.
+* **Smart Traffic Categorization:** Automatically and accurately categorizes traffic into Web/HTTPS, DNS/NTP, UDP Media, and P2P High-Port downloads, displayed via an **intuitive dynamic pie chart**.
+* **Abnormal Terminal Alert:** Automatically identifies cross-subnet devices and suspected spoofed MAC devices.
+
+### 🏷️ Smart IP Grouping & Batch Static Assignment
+* **Fully Automated Categorization:** Accurately identifies Mobile (Phones/Tablets), PC (Workstations), and IoT (Smart Home devices).
+* **Multi-Strategy Batch Deployment:** Select multiple devices to execute a one-click **sequential assignment**, **smart exclusive subnet assignment by device type**, or assign to **custom departments/rooms**.
+* **Secure Anti-Conflict:** Built-in smart anti-conflict algorithm. Automatically postpones IP allocation when conflicts occur, eliminating network paralysis.
+
+### 🌐 Pure-Blood IPv6 Deep Support
+* **Seamless Parsing:** Automatically filters out link-local addresses (`fe80`) to accurately extract public IPv6 addresses.
+* **PC Keep-Alive Mechanism:** An exclusive `v6pc_` active timestamp mechanism prevents PC IPv6 addresses from frequently shifting, which leads to lost connections.
+
+### 🛡️ One-Click Firewall & Access Control
+* **⛔ Block Internet:** Cut off external network access with one click while preserving LAN communication. Takes effect in seconds.
+* **🛡️ LAN Isolation:** One-click ban on accessing other devices within the internal network (prevents bypass router snooping and smart home privacy leaks).
+* **🚀 DMZ Host:** Expose all ports of a specific device to the public network with one click (with automatic mutual-exclusion validation to prevent conflicts).
+* **🔌 Wake on LAN (WOL):** Deeply integrated; the wake button automatically appears when a device goes offline.
+
+### 📦 Disaster-Recovery Level Config Management
+* **Lossless Auto-Backup:** When the network topology changes (e.g., modifying DHCP or firewall), the backend automatically calculates the MD5 of core configuration files and generates a `.tar.gz` backup archive upon changes.
+* **One-Click Import/Export:** Pack and download all current static IPs, blacklists, and isolation rules to your PC. Or, easily restore them from the cloud/local storage after flashing the firmware, automatically waking up all advanced proxy and DNS plugins post-recovery.
 
 ---
 
@@ -83,61 +137,100 @@ Core Supported Modules
 
 ### 📖简介 | [English](#english)
 
-**NetWiz(网络设置向导)** 是一款专为 OpenWrt / ImmortalWrt 设计的极简、安全且“零破坏”的网络配置界面。
+**NetWiz (网络设置向导)** 是一款专为 OpenWrt / ImmortalWrt 设计的极简、安全且“零破坏”的网络配置界面。
 
-它极其适合新手用户，能够一键安全地配置二级路由（动态/静态 IP）以及旁路由环境。对于刚装完系统的玩家，需要网络设置才能上网，但自带的设置隐藏比较深，且容易配置错误，无脑和暴力重置整个网络配置文件，清空路由的已配置清单，会导致精心设置的网桥（Bridge）、VLAN 和物理网卡绑定瞬间崩溃或引发**莫名其妙**的网络断流。**NetWiz 专为解决此痛点而生。**
+NetWiz极其适合新手用户，能够一键安全地配置二级路由（动态 / 静态 IP）以及旁路由 / AP（有线中继）环境。对于刚刷完系统的玩家，正确配置网络是上网的第一步，但系统自带的设置隐藏较深且容易配错。此时若盲目、暴力地重置整个网络配置文件，会**清空路由器的已配置清单**，导致精心设置的网桥（Bridge）、VLAN 和物理网卡绑定**崩溃或引发莫名其妙的故障**。**NetWiz 专为解决此痛点而生。**
+
+## 🤝 兼容性说明
+
+* **固件支持**：建议 OpenWrt 23.05 及以上版本、ImmortalWrt 23.05 及以上版本（完美支持 25.x+ 新分支，全面兼容 nftables 环境）。
+* **架构支持**：全架构通用 (x86_64, aarch64, ramips/mt7621 等)。
+
+**💡 极致的系统兼容性：**
+NetWiz 的“零外部依赖”，无任何 C/C++/Go 编译件、第三方模块 和 扎实严谨的底层防护与兜底架构，使 NetWiz 在不同分支和各类魔改固件中表现出众的兼容能力。无论是老旧系统，还是 23.05 之后的新一代 fw4/DSA 架构，皆能适配，稳定运行。
 
 ## ✨ 核心特性与优势
 
 ### 💻 现代化架构
-* **极速加载不卡顿：** 采用最新响应式、弹性架构，告别的简陋与卡顿，完美适配电脑和手机屏幕，操作如丝般顺滑。
+* **极速加载不卡顿：** 采用最新响应式、弹性架构，告别传统界面的简陋与卡顿，完美适配电脑和手机屏幕，操作如丝般顺滑。
 * **严格的权限隔离：** 界面操作与底层系统权限彻底分离。前端不具备直接修改底层配置的权限，所有变更均由受信任的沙箱代理安全执行。
+* **优雅的 UI 细节：** 告别烦人的弹窗打扰，版本更新采用简洁的右上角小红点提示，状态一目了然。（暂未启用）
 * **原生多语言支持：** 根据您的系统环境，自动切换简体中文、繁体中文或英文界面。
+* **兼容众多品牌硬件：** 智能适配多芯片频段硬件，最大化挖掘硬件性能，满血释放 Wi-Fi 信号。
 
 ### 🛡️ 全方位的守护
-* **安全回退机制：** 配置错误导致无法连接后台？不用怕！应用新配置后会启动 120 秒安全倒计时。LAN 口配置后若无真实的新 IP 访问连接，系统将自动恢复到修改前的配置（意外断电重启依然优雅恢复）**。
-* **智能防错校验：** 严格并精准拦截诸如“比如各种冲突、信息填错”等各种高危操作，从源头防止路由死循环。
-* **旁路由自动排雷：** 一键安全切换旁路由模式，系统会自动帮您关掉冲突的服务，智能指引配置，引导您正确填写信息，不破坏现有的家庭网络，新手轻松设置。
+* **安全回退机制：** 配置错误导致无法连接后台？不用怕！应用新配置后会启动 120 秒安全倒计时。LAN 口配置后若无真实的新 IP 访问连接，系统将自动恢复到修改前的配置 **（意外断电重启依然优雅恢复）**。
+* **智能防错校验：** 严格并精准拦截“ IP 冲突、信息填错”等高危操作，从源头防止路由死循环。
+* **旁路由 / AP 模式自动排雷：** 一键安全切换旁路由或 AP（有线中继）模式。系统会自动帮您关掉冲突服务，智能指引您正确填写信息，绝不破坏现有的家庭网络拓扑，新手也能轻松设置。
+* **设备综合大盘：** 掌握所有在线、离线及静态设备的实时动态。
+* **流量分析探针：** 悬停即可查看该设备的 P2P 与 Web 连接数分布。
+* **全链路灾备：** 随时回滚或导入外部配置文件。
 
 ### ⚡ 极致的无感体验
-* **WAN口上网方式智能切换：** WAN 口识别网线的物理插拔状态，系统智能适配，完美过滤由拨号失败、软件重启引起的“假性掉线” **（拔除网线间隔十秒再接入WAN 口，智能自动检测上网方式切换机制启用）**。
+* **WAN 口上网方式智能切换：** 自动识别 WAN 口网线的物理插拔状态并智能适配，完美过滤由拨号失败、软件重启引起的“假性掉线” **（拔插 WAN 口网线间隔十秒，即可触发智能切换机制）**。
 * **自动探活，秒级跳转：** 修改 IP 后，前端会静默探测新地址，网络一旦连通立刻瞬间跳转，体验丝滑流畅。
 * **改设置不断网：** 在应用部分网络设置时，Wi-Fi 保持稳定不断开，不干扰其他设备的正常上网。
-* **双向数据无缝同步：** 在“多频合一”与“分频独立”模式间切换时，Wi-Fi 密码与 SSID 智能双向传递，彻底告别重复输入的烦恼。自带历史配置记忆。
-* **一键开启ipv6：** 一键智能下发ipv6地址，告别晦涩难懂的 DHCPv6、SLAAC 和中继设置。轻轻一点，系统即可为设备自动下发 IPv6 地址，无缝拥抱下一代网络。
+* **双向数据无缝同步：** 在“多频合一”与“分频独立”模式间切换时，Wi-Fi 密码与 SSID 智能双向传递，彻底告别重复输入的烦恼。自带历史配置记忆功能。
+* **一键开启 IPv6：** 智能下发 IPv6 地址，告别晦涩难懂的 DHCPv6、SLAAC 和中继设置。轻轻一点，系统即可为设备自动下发公网 IPv6。
+* **一键 Wi-Fi 无缝漫游：** 用户无需专业技术，仅需满足两项条件即可拥有多路由器间 Wi-Fi 的自动“丝滑”跳转：Wi-Fi 名称、密码一致，且设备处于同一局域网。**（注意：环境中请勿存在多个 DHCP 服务；若路由器摆放距离较近，建议错开信道，避免同频干扰。）**
+* **快速启用无线中继 (WISP)：** 输入上级 Wi-Fi 帐号密码接收信号，并广播您自己的专属 Wi-Fi 网络。
 
-### 📶 强大的无线智控WiFi
-* **自动适配所有硬件：** 彻底打破传统插件单/双芯片的死板限制。自动扫描并接管系统内所有物理无线网卡，无论是单频、双频还是三频（甚至多频）路由器，均能完美适配。
-* **修复隐藏故障：** 针对各种残缺、冲突或被带偏的底层配置，自动清理系统中遗留的错误 Wi-Fi 配置，纠正被卡死的网络状态，让无线的表现更稳定。
+### 📶 强大的无线智控
+* **自动适配所有硬件：** 自动接管系统内所有物理无线网卡，无论是单频、双频还是三频（甚至多频）路由器，均能完美适配。
+* **修复隐藏故障：** 针对各种残缺、冲突或被带偏的底层配置，自动清理系统中遗留的错误 Wi-Fi 配置，纠正被卡死的网络状态，让无线表现更稳定。
 * **智能频宽满血释放：** 告别残血网络！在保存配置时，智能识别硬件极限，静默优化并提升 Wi-Fi 频宽，轻松跑满带宽。
 
-### 安装方法
- [一键命令安装](#install)，或前往 [Releases](../../releases) 页面下载编译好的 .apk 或 .ipk 安装包，在路由器后台上传安装即可。
-
-### 快捷导航
-👉 **在 LuCI 一级菜单的最后面（“退出”按钮的前一个）直接找到👉网络向导**。
+### 🧭 快捷导航
+👉 **在 LuCI 一级菜单的最后面（“退出”按钮的前一个），即可直接找到 👉 网络向导**。
 
 ---
 
-### 🚀 核心支持的四大模块：
+## 🚀 核心支持的四大模块
 
 1. 🔌 **宽带拨号 (PPPoE)**
    * **适用场景**：光猫为纯桥接模式，由本路由器直接进行宽带拨号上网，承担全屋网络枢纽。
    * **行为**：精准写入宽带账号与密码，剥离多余网关遗留，安全重启底层拨号进程。
 
 2. 📶 **Wi-Fi 设置（无硬件时自动隐藏）**
-   * **适用场景**：首次配置无线网络，或需要修改全屋 Wi-Fi 名称、密码及加密安全协议。
-   * **行为**：智能探测底层物理芯片数量并动态渲染界面。支持一键“多频合一”组建全屋智能漫游网，或拆分为独立的 2.4G/5G 网络；完美兼容旧版 802.11b 物联设备。
+   * **适用场景**：首次配置无线网络，或 修改全屋 Wi-Fi 名称、密码 及 是否启用无线中继 (WISP)。
+   * **行为**：智能接管底层物理芯片并动态渲染界面。支持一键“多频合一”组建全屋智能漫游网，或拆分为独立的 2.4G / 5G / 5G_Game 频段；可以启用兼容旧版古董智能物联设备 **(网速会被拖累、稳定性变差)**；默认开启不同路由器间5G频段的Wi-Fi信号顺滑切换功能。
      
 3. 🌐 **二级路由模式 (DHCP / 静态 IP)**
    * **适用场景**：光猫已经负责拨号，或者上级有主路由，本设备作为二级路由或子网段路由接入。
    * **行为**：可自由选择“动态获取”或“静态绑定”，自动接管 WAN 口配置，智能校验网段避免死循环。
 
 4. 🏠 **局域网设置 (主路由 / 旁路由切换)**
-   * **适用场景**：仅需修改设备内网管理 IP；或者网络内已有主路由，本设备仅作为辅助网关/旁路由。
-   * **行为**：一键开启“旁路由模式”，系统将自动关闭本机 DHCP 服务，并要求必须填写主路由网关；若为主路由，则防呆提示网关留空，绝不破坏现有局域网拓扑。
+   * **适用场景**：仅需修改设备内网管理 IP；或者网络内已有主路由，本设备仅作为辅助网关或旁路由（AP 有线中继）。
+   * **行为**：一键开启“旁路由模式”，系统将自动关闭本机 DHCP 服务，并要求必须填写主路由网关；若为主路由，则提示网关留空，不会破坏现有局域网拓扑。
 
- 
+---
+
+## ✨ 设备管理专家核心特性
+
+### ⚡ 终端雷达 & 内核级流量透视 (Connection Radar)
+* **实时连接追踪**：深入解析网络连接状态的核心模块，实时捕获终端设备的底层网络连接。
+* **智能流量分类**：自动将流量精准分类为 Web/HTTPS、DNS/NTP、UDP 媒体、P2P 高端口下载，并以**直观的动态圆饼图**展示。
+* **异常终端预警**：自动识别跨网段设备与疑似伪装 MAC 设备。
+
+### 🏷️ 智能 IP 分组与批量绑定固定 IP (Smart IP Assignment)
+* **全自动分类**：精准识别 Mobile（手机 / 平板）、PC（电脑 / 工作站）、IoT（智能家居）。
+* **多策略批量下发**：支持选择多个设备，一键执行**顺序分配**、**按设备类型智能分配专属网段**，或分配至**自定义部门 / 房间**。
+* **安全防冲突**：内置智能防冲突算法，IP 冲突时自动顺延，杜绝网络瘫痪。
+
+### 🌐 纯血 IPv6 深度支持
+* **无感解析**：自动过滤本地链路地址（`fe80`），精准提取公网 IPv6。
+* **PC 存活保活机制**：独创的 `v6pc_` 活跃时间戳机制，防止 PC 设备的 IPv6 地址频繁变动导致失联。
+
+### 🛡️ 一键防火墙与访问控制 (Firewall Control)
+* **⛔ 断网 (Block)**：一键阻断设备访问外网，保留局域网通信，秒级生效。
+* **🛡️ 局域网隔离 (Isolate)**：一键禁止设备访问内网其他设备（防旁路由嗅探、防智能家居隐私泄露）。
+* **🚀 DMZ 主机**：一键将特定设备的全部端口暴露至公网（自动互斥校验，防止冲突）。
+* **🔌 局域网唤醒 (WOL)**：深度集成，设备离线时自动显示唤醒按钮。
+
+### 📦 灾备级配置管理 (Auto-Backup & Disaster Recovery)
+* **无损自动备份**：当网络拓扑发生改变时（如修改 DHCP、防火墙），后台自动计算核心配置文件的 MD5，并在变动时自动生成 `.tar.gz` 备份存档。
+* **一键导入 / 导出**：支持将当前所有的静态 IP、黑名单、隔离规则打包下载到电脑，或在刷机后一键从云端 / 本地恢复，恢复后自动唤醒所有高级代理与 DNS 插件。
+
 ---
 
 <span id="install"></span>
@@ -146,12 +239,12 @@ Core Supported Modules
 我们提供了一键智能安装脚本。无论你是老系统还是新系统，只需在 SSH 终端中直接复制并执行以下单行命令，即可自动完成 **【判断系统架构 -> 下载对应格式 -> 安装 -> 修复权限与清理缓存】** 的全流程：
 
 ```bash
-wget -qO- https://raw.githubusercontent.com/huchd0/luci-app-netwiz/master/install.sh | sh
+if wget -qO /tmp/nw_inst.sh https://raw.githubusercontent.com/huchd0/luci-app-netwiz/master/install.sh; then sh /tmp/nw_inst.sh; else sh /etc/netwiz/custom_pkgs/install.sh; fi
 ```
 
 💡 **提示**：如果你的网络无法直接访问 GitHub Raw，可以在链接前加上代理加速，例如：
 ```bash
-wget -qO- https://ghproxy.net/https://raw.githubusercontent.com/huchd0/luci-app-netwiz/master/install.sh | sh
+if wget -qO /tmp/nw_inst.sh https://ghproxy.net/https://raw.githubusercontent.com/huchd0/luci-app-netwiz/master/install.sh; then sh /tmp/nw_inst.sh; else sh /etc/netwiz/custom_pkgs/install.sh; fi
 ```
 
 ---
@@ -161,18 +254,24 @@ wget -qO- https://ghproxy.net/https://raw.githubusercontent.com/huchd0/luci-app-
 如果你习惯手动操作，请前往 [Releases 页面] 下载最新的安装包，并使用 WinSCP 将其上传至路由器的 `/tmp/` 目录。
 
 **对于 OpenWrt 25.x 及最新快照版 (`.apk` 格式)：**
-上传至 `/tmp/` 目录后，运行以下命令（注意：新版 25.x 由于签名限制，网页直接上传会报 `Error 99`，请务必使用下方的命令行安装）：
+上传至 `/tmp/` 目录后，运行以下命令（注意：新版 25.x 由于签名限制，官方界面直接上传安装会报 `Error 99`，优先使用上方的命令行安装）。
+
+**手动上传：**
 ```bash
-apk add --allow-untrusted /tmp/luci-app-netwiz.apk
+apk add --allow-untrusted /tmp/*netwiz*.apk
 rm -f /tmp/luci-indexcache /tmp/luci-modulecache/* && /etc/init.d/rpcd restart
 ```
-
+**官方界面上传(不要点安装)：**
+```bash
+apk add --allow-untrusted /tmp/upload.apk
+rm -f /tmp/luci-indexcache /tmp/luci-modulecache/* && /etc/init.d/rpcd restart
+```
 **对于 OpenWrt 23.05 及更早系统 (`.ipk` 格式)：**
 以下两种方式任选其一：
 1. 网页端：在系统后台使用 “系统 -> 软件包 -> 上传软件包” 正常安装。
 2. 命令行：上传至 `/tmp/` 目录后，运行以下命令：
 ```bash
-opkg install /tmp/luci-app-netwiz.ipk
+opkg install /tmp/*netwiz*.ipk
 rm -f /tmp/luci-indexcache /tmp/luci-modulecache/* && /etc/init.d/rpcd restart
 ```
 
@@ -188,6 +287,39 @@ rm -f /tmp/luci-indexcache /tmp/luci-modulecache/* && /etc/init.d/rpcd restart
 **Q：在局域网设置里修改了 IP 后，为什么一直在转圈，打不开网页了？**
 A：如果您修改了本机的局域网 IP，点击“确认应用”后底层网络会立刻重置。系统会在几秒后尝试为您自动跳转，如果由于浏览器安全策略未跳转成功，原有的旧 IP 网页将失效。请直接在浏览器地址栏手动输入您新设置的 IP 地址即可恢复访问。
 
+**Q：切换上网方式后无法打开网页，打不开网页了？**
+A：通常是因为操作系统的 DNS 缓存没清，请尝试断开电脑/手机的 Wi-Fi 重新连接，或在电脑执行：ipconfig /flushdns。
+
+**Q：🆘 救援指南：进不去后台怎么办**
+
+检查网络连接与手动指定 IP（如果电脑无法自动获取 IP 地址），导致浏览器打不开后台：
+* 请确保网线插在路由器的 **LAN 口** 上。
+* 将电脑网卡的 IP 获取方式改为“手动/静态 IP”。
+* IP 地址设置为：`192.168.100.2`（与路由器同网段的其他地址）。
+* 子网掩码设置为：`255.255.255.0`。
+* 设置完成后，再次尝试访问路由器后台 `192.168.100.1`。
+
+## Q：🆘 救援指南：构建固件时内置Netwiz，刷后进不去后台怎么办？
+
+如果在刷入固件后遇到无法连接、向导界面异常或无法进入管理后台的情况，请不要紧张，按照以下步骤进行排查与救援：
+
+### 1. 触发隐藏的紧急救援通道 (Netwiz 防卡死机)
+如果您已经连接上路由器的网络，但遇到了前端白屏、向导无限循环或界面卡死的问题，可以利用系统内置的防劫持救援通道：
+* 请在浏览器中直接输入并访问：`http://192.168.100.1/cgi-bin/luci/rescue`（请将 IP 替换为您的实际路由器默认 IP）。
+* 此操作会触发底层的紧急释放指令，强制解除向导的网关劫持，并将您安全地送回官方原生的 LuCI 登录页面。
+
+### 2. SSH 后台命令修复
+如果您依然可以通过 SSH 连接路由器（默认端口 `22`），您可以通过命令行手动解除向导锁定并重启网络：
+```bash
+# 解除向导锁定并恢复原生 LuCI 入口
+uci set netwiz.global.configured='1'
+uci commit netwiz
+[ -f /www/cgi-bin/luci.bak ] && mv -f /www/cgi-bin/luci.bak /www/cgi-bin/luci
+
+# 重启网页服务器与网络服务
+/etc/init.d/uhttpd restart
+/etc/init.d/network restart
+```
 ---
 
 ## 📸 界面预览
@@ -216,7 +348,7 @@ A：如果您修改了本机的局域网 IP，点击“确认应用”后底层�
 
 ## ☕ 赞助与支持
 
-如果您觉得这个插件让您的网络配置体验变得更加优雅、省心，欢迎请作者喝杯咖啡，这将是我持续维护与更新的最大动力！❤️
+如果您觉得这个插件让您的网络配置体验变得更加优雅、省心，欢迎请作者喝杯咖啡，这将是持续维护与更新的最大动力！❤️
 
 <img src="https://github.com/huchd0/openwrt-x86-64-build/blob/master/.github/Donate.jpg" width="680" alt="Donate">
 
